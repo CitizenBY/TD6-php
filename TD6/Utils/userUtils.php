@@ -148,7 +148,84 @@ function UpdateUsername($username,$NewUsername){
 }
 
 function createArticle($username,$articleTitle,$articleContent){
+  $mysql = connect();
 
+  $query = "INSERT INTO article(title,content, date,user_id)
+  SELECT :title,:content,NOW(), id as user_id
+  FROM user
+  Where username=:username";
+
+  $req = $mysql->prepare($query);
+
+  $data = array(
+    "title" => $articleTitle,
+    "content" => $articleContent,
+    "username" => $username
+  );
+
+  execute($req,$data);
+
+}
+function getAllArticlesTitlesFromJohnDoe() {
+  $mysql = connect();
+
+  $query = "SELECT title, id
+  FROM article
+  WHERE user_id='1'";
+
+  $req = $mysql->prepare($query);
+  execute($req);
+
+  $articles=array();
+
+  while($row = $req->fetch()){
+    $title = $row['title'];
+    $id = $row['id'];
+
+    $articles[$id]=$title;
+  }
+
+  return $articles;
+}
+function deleteArticle($id){
+$mysql= connect();
+
+$query = "DELETE FROM article WHERE id=:id";
+
+$req = $mysql->prepare($query);
+
+$data = array('id' => $id);
+
+execute($req,$data);
+}
+
+function getAllArticlesFromJohnDoe() {
+  $mysql = connect();
+
+  $query = "SELECT title, content, date
+  FROM article
+  WHERE user_id='1'";
+
+  $req = $mysql->prepare($query);
+  execute($req);
+
+  $articles=array();
+
+  while($row = $req->fetch()){
+    $title = $row['title'];
+    $content = $row['content'];
+    $date = $row['date'];
+
+    $article = array(
+      "title" => $title,
+      "content" => $content,
+      "date" => $date
+    );
+
+    array_push($articles,$article);
+  }
+
+  return $articles;
 }
 
 

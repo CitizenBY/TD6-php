@@ -80,6 +80,30 @@ include_once(__DIR__."/./Utils/userUtils.php");
 
     </form>    
 
+    <h3><b>Question 4:</b> Delete an article from John Doe</h3>
+    <p>Select the article to delete</p>
+    <form action = "Scripts\deleteArticle.php" method= "post">
+        <select name="articleTitle">
+            <?php
+                $articles = getAllArticlesTitlesFromJohnDoe();
+                foreach($articles as $id =>$title){
+                    echo"<option value ='".$id."'>".$title."</option>";
+                }
+            ?>
+        </select></p>
+        <input type ="submit" name = "DeleteArticle" value = "Delete Article"> 
+        </form>
 
+    <h3><b>Question 5:</b> Articles From John Doe</h3>
+    <?php
+        $articles = getAllArticlesFromJohnDoe();
+        foreach($articles as $key =>$article){
+            echo"<h4>".$article["title"]."</h4></p>";
+            echo $article["content"];
+            echo"</p>";
+            echo $article["date"];
+
+        }
+    ?>
 </body>
 </html>
