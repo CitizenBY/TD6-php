@@ -108,8 +108,6 @@ function addUser($username,$password,$firstname,$lastname,$phone,$email,$gender)
   );
   execute($req,$data);
 
-
-
 }
 
 function getAllUsernames() {
@@ -144,8 +142,12 @@ function UpdateUsername($username,$NewUsername){
     "newUsername"=>$NewUsername
   );
 
-  execute($rec,$data);
+  execute($req,$data);
 
+
+}
+
+function createArticle($username,$articleTitle,$articleContent){
 
 }
 

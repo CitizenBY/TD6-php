@@ -29,8 +29,8 @@ include_once(__DIR__."/./Utils/userUtils.php");
             <option value="male">Male</option>
             <option value = "female">Female</option>
         </select> </p>
-        <input type = "submit" name = "Register" value = "Register">
-
+        <input type = "submit" name = "register" value = "Register">
+    
     <?php
         $users =getAllUsers();
 
@@ -46,6 +46,7 @@ include_once(__DIR__."/./Utils/userUtils.php");
 
         
     ?>
+    </form>
 
     <h3><b>Question 2 :</b> Modify username</h3>
     <p>Select the user to modify</p>
@@ -60,8 +61,24 @@ include_once(__DIR__."/./Utils/userUtils.php");
     </select></p>
     <input placeholder = "New Username" name="newUsername"></p>
     <input type ="submit" name = "modify" value = "Modify">
+    </form>
 
-        
+    <h3><b>Question 3 :</b> Create article for user</h3>
+    <p>Select the user to create an article for</p>
+    <form action = "Scripts\createArticle.php" method = "post">
+    <select name="username">
+         <?php
+            $usernames = getAllUsernames();
+            foreach($usernames as $key =>$username){
+                echo "<option value ='".$username."'>".$username."</option>";
+            }
+         ?>
+    </select></p>
+    <input name="articleTitle" placeholder="Article Title"></p>
+    <textarea name = "articleContent" placeholder="Article Content" rows="6" cols="40"></textarea></p>
+    <input type ="submit" name = "createArticle" value = "Create Article"> 
+
+    </form>    
 
 
 </body>
